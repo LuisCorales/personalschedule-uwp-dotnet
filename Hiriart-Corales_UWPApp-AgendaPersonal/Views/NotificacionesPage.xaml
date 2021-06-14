@@ -1,0 +1,68 @@
+﻿<Page
+    x:Class="Hiriart_Corales_UWPApp_AgendaPersonal.Views.NotificacionesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:Hiriart_Corales_UWPApp_AgendaPersonal.Core.Models"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid
+            Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <CommandBar Name="notificacionCommandBar" VerticalAlignment="Top">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton Name="nuevoBoton" Label="Nuevo" Icon="Add" Click="NuevoBoton_Click"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Name="editarBoton" Label="Editar"  Icon="Edit"  Width="Auto" Click="EditarBoton_Click"/>
+                    <AppBarSeparator/>
+                    <AppBarButton Name="eliminarBoton" Label="Eliminar"  Icon="Delete"  Width="Auto" Click="EliminarBoton_Click"/>
+                    <AppBarSeparator/>
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Name="ayudaBoton" Label="Ayuda" Click="AyudaBoton_Click"/>
+                    <AppBarButton Name="actualizarBoton" Label="Actualizar datos" Click="ActualizarBoton_Click"/>
+                </CommandBar.SecondaryCommands>
+                <CommandBar.Content>
+                    <TextBlock Text="Pantalla principal de Notificaciones"/>
+                </CommandBar.Content>
+            </CommandBar>
+            <RelativePanel>
+                <ListView Name="NoticiacionList"
+                  SelectionMode="Single"
+                  ScrollViewer.VerticalScrollBarVisibility="Auto"
+                  ScrollViewer.IsVerticalRailEnabled="True"
+                  ScrollViewer.VerticalScrollMode="Enabled"
+                  ScrollViewer.HorizontalScrollMode="Enabled"
+                  ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                  ScrollViewer.IsHorizontalRailEnabled="True"
+                  Margin="20">
+                    <ListView.HeaderTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal"  >
+                                <TextBlock Text="Título" Margin="8,0" Width="150" Foreground="#FF403D3D" />
+                                <TextBlock Text="Fecha y Hora" Width="150" Foreground="#FF403D3D" />
+                                <TextBlock Text="Evento" Width="150" Foreground="#FF403D3D" />
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.HeaderTemplate>
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Notificacion">
+                            <StackPanel Orientation="Horizontal" >
+                                <TextBlock Name="tituloTextBlock"
+                                       Text="{x:Bind Titulo}"
+                                       Width="150" TextWrapping="Wrap"/>
+                                <TextBlock Name="horaTextBlock"
+                                       Text="{x:Bind Hora}"
+                                       Width="150" TextWrapping="Wrap"/>
+                                <TextBlock Name="eventoTextBlock"
+                                       Text="{x:Bind Evento}"
+                                       Width="150" TextWrapping="Wrap"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </RelativePanel>
+        </Grid>
+    </Grid>
+</Page>

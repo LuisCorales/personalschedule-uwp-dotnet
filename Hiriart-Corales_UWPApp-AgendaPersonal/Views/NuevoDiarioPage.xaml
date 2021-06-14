@@ -1,0 +1,44 @@
+﻿<Page
+    x:Class="Hiriart_Corales_UWPApp_AgendaPersonal.Views.NuevoDiarioPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:Hiriart_Corales_UWPApp_AgendaPersonal.Core.Models"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <CommandBar Name="diarioCommandBar" VerticalAlignment="Top">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton Name="volverBoton" Label="Volver" Icon="Back" Click="VolverBoton_Click"/>
+                    <AppBarButton Name="crearBoton" Label="Guardar nuevo diario" Icon="Save" Click="CrearBoton_Click"/>
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Name="ayudaBoton" Label="Ayuda" Click="AyudaBoton_Click"/>
+                </CommandBar.SecondaryCommands>
+                <CommandBar.Content>
+                    <TextBlock Text="Nueva entrada de diario"/>
+                </CommandBar.Content>
+            </CommandBar>
+            <RelativePanel Margin="0,20,0,0">
+                <TextBlock HorizontalAlignment="Left" Margin="91,119,0,0" Text="Fecha" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <CalendarDatePicker x:Name="fechaCalendarDatePicker" Margin="91,143,0,0" VerticalAlignment="Top" Width="454" DateChanged="FechaCalendarDatePicker_DateChanged"/>
+                <TextBlock HorizontalAlignment="Left" Margin="91,200,0,0" TextWrapping="Wrap" VerticalAlignment="Top" ><Run Text="C"/><Run Text="o"/><Run Text="ntenido"/></TextBlock>
+                <TextBox x:Name="contenidoTextBox" HorizontalAlignment="Left" Margin="91,224,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Width="454" Height="400"/>
+                <TextBlock HorizontalAlignment="Left" Margin="769,119,0,0" Text="Eventos relacionados" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                <!--ListBox para mostar los eventos de la fecha-->
+                <ListBox Name="eventosListBox" ItemsSource="{x:Bind Eventos}" SelectionMode="Extended" Margin="769,143,0,0"
+                     VerticalAlignment="Top" HorizontalAlignment="Left" Width="454" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                     BorderBrush="#99000000" Background="#66FFFFFF" BorderThickness="1,1,1,1">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate x:DataType="local:Evento">
+                            <TextBlock Text="{x:Bind Titulo}" Width="Auto"/>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
+            </RelativePanel>
+        </Grid>
+    </Grid>
+</Page>

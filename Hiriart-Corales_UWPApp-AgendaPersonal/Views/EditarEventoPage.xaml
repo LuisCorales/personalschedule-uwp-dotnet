@@ -1,0 +1,89 @@
+﻿<Page
+    x:Class="Hiriart_Corales_UWPApp_AgendaPersonal.Views.EditarEventoPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:local="using:Hiriart_Corales_UWPApp_AgendaPersonal.Core.Models"
+    Style="{StaticResource PageStyle}"
+    mc:Ignorable="d">
+
+    <Grid x:Name="ContentArea" Margin="{StaticResource MediumLeftRightMargin}">
+        <Grid Background="{ThemeResource SystemControlPageBackgroundChromeLowBrush}">
+            <CommandBar Name="eventoCommandBar" VerticalAlignment="Top">
+                <CommandBar.PrimaryCommands>
+                    <AppBarButton Name="volverBoton" Label="Volver" Icon="Back" Click="VolverBoton_Click"/>
+                    <AppBarButton Name="crearBoton" Label="Guardar nuevo diario" Icon="Save" Click="EditarBoton_Click"/>
+                </CommandBar.PrimaryCommands>
+                <CommandBar.SecondaryCommands>
+                    <AppBarButton Name="ayudaBoton" Label="Ayuda" Click="AyudaBoton_Click"/>
+                </CommandBar.SecondaryCommands>
+                <CommandBar.Content>
+                    <TextBlock Text="Editar Evento"/>
+                </CommandBar.Content>
+            </CommandBar>
+            <RelativePanel Margin="0,20,0,0">
+                <ScrollViewer Width="1865" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Visible">
+                    <StackPanel Height="1060" Orientation="Horizontal">
+                        <StackPanel Height="1055" Orientation="Vertical">
+                            <TextBlock HorizontalAlignment="Left" Margin="91,119,0,0" Text="Fecha" TextWrapping="Wrap" VerticalAlignment="Top"/>
+                            <CalendarDatePicker Name="fechaCalendarDatePicker" Margin="91,11,0,0" VerticalAlignment="Top" Width="454"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Inicio" />
+                            <TimePicker Name="inicioTimePicker" Margin="91,11,0,0" VerticalAlignment="Top" Width="454"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Fin" />
+                            <TimePicker Name="finTimePicker" Margin="91,11,0,0" VerticalAlignment="Top" Width="454"/>
+                            <TextBlock Text="Título" Margin="91,20,0,0" Width="Auto" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBox x:Name="tituloTextBox" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="91,11,0,0" Width="454" Height="32"/>
+                            <TextBlock Text="Descripción" Margin="91,20,0,0" Width="Auto" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                            <TextBox x:Name="descripcionTextBox" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="91,11,0,0" Width="454" Height="32"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Ubicación" />
+                            <TextBox x:Name="ubicacionTextBox" HorizontalAlignment="Left" VerticalAlignment="Top"  Margin="91,11,0,0" Width="454" Height="32"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="EsSerie" />
+                            <CheckBox x:Name="serieCheckBox" HorizontalAlignment="Left"  Margin="91,11,0,0" Width="64" Height="32" Checked="siEsEvento" Unchecked="noEsEvento"/>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Días" />
+                            <ListBox Name="diasListBox" SelectionMode="Extended" Margin="91,11,0,0"
+                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="454" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             BorderBrush="#99000000" Background="#66FFFFFF" BorderThickness="1,1,1,1">
+                            </ListBox>
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,119,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Contactos" />
+                            <ListBox Name="contactosListBox" SelectionMode="Extended" Margin="91,11,0,0"
+                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="454" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             BorderBrush="#99000000" Background="#66FFFFFF" BorderThickness="1,1,1,1">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:Contacto">
+                                        <StackPanel Orientation="Horizontal">
+                                            <TextBlock Text="{x:Bind Nombre}" Width="Auto"/>
+                                            <TextBlock Text="{x:Bind Apellido}" Width="Auto"/>
+                                        </StackPanel>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Memos" />
+                            <ListBox Name="memoListBox" SelectionMode="Single" Margin="91,11,0,0"
+                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="454" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             BorderBrush="#99000000" Background="#66FFFFFF" BorderThickness="1,1,1,1">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:Memo">
+                                        <TextBlock Text="{x:Bind Contenido}" Width="Auto"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                            <TextBlock HorizontalAlignment="Left" Margin="91,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Text="Notificaciones" />
+                            <ListBox Name="notifiListBox" SelectionMode="Single" Margin="91,11,0,0"
+                             VerticalAlignment="Top" HorizontalAlignment="Left" Width="454" Height="200" ScrollViewer.VerticalScrollBarVisibility="Auto"
+                             BorderBrush="#99000000" Background="#66FFFFFF" BorderThickness="1,1,1,1">
+                                <ListBox.ItemTemplate>
+                                    <DataTemplate x:DataType="local:Notificacion">
+                                        <TextBlock Text="{x:Bind Titulo}" Width="Auto"/>
+                                    </DataTemplate>
+                                </ListBox.ItemTemplate>
+                            </ListBox>
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </RelativePanel>
+        </Grid>
+    </Grid>
+</Page>
